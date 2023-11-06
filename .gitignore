@@ -1,67 +1,94 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# 디폴트 무시된 파일
+/.idea/shelf/
+/workspace.xml
+# 에디터 기반 HTTP 클라이언트 요청
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
 
-# dependencies
+
+
+# Created by https://www.toptal.com/developers/gitignore/api/react
+# Edit at https://www.toptal.com/developers/gitignore?templates=react
+
+### front ###
+/front/.DS_*
+/front/*.log
+/front/logs
+/front/**/*.backup.*
+/front/**/*.back.*
+
 /front/node_modules
-/front/.pnp
-/front.pnp.js
+/front/bower_components
 
-# testing
-/front/coverage
+/front/*.sublime*
 
-# production
-/front/build
+/front/psd
+/front/thumb
+/front/sketch
 
-# misc
-/front/.DS_Store
-/front/.env.local
-/front/.env.development.local
-/front/.env.test.local
-/front/.env.production.local
-
-/front/npm-debug.log*
-/front/yarn-debug.log*
-/front/yarn-error.log*
+# End of https://www.toptal.com/developers/gitignore/api/react
 
 
-HELP.md
-./back/salcho/gradle
-./back/salcho/build/
-./back/salcho/!gradle/wrapper/gradle-wrapper.jar
-./back/salcho/!**/src/main/**/build/
-./back/salcho/!**/src/test/**/build/
-
-### STS ###
-./back/salcho/.apt_generated
-./back/salcho/.classpath
-./back/salcho/.factorypath
-./back/salcho/.project
-./back/salcho/.settings
-./back/salcho/.springBeans
-./back/salcho/.sts4-cache
-./back/salcho/bin/
-./back/salcho/!**/src/main/resources/*
-./back/salcho/!**/src/main/**/bin/
-./back/salcho/!**/src/test/**/bin/
-
-### IntelliJ IDEA ###
-./back/salcho/.idea
-./back/salcho/*.iws
-./back/salcho/*.iml
-./back/salcho/*.ipr
-./back/salcho/out/
-./back/salcho/!**/src/main/**/out/
-./back/salcho/!**/src/test/**/out/
-
-### NetBeans ###
-./back/salcho//nbproject/private/
-./back/salcho/nbbuild/
-./back/salcho/dist/
-./back/salcho/nbdist/
-./back/salcho/.nb-gradle/
-
-### VS Code ###
-./back/salcho/.vscode/
 
 
-./back/salcho/src/main/resources/
 
+
+# Created by https://www.toptal.com/developers/gitignore/api/java,gradle
+# Edit at https://www.toptal.com/developers/gitignore?templates=java,gradle
+
+### back ###
+# Compiled class file
+/back/*.class
+
+# Log file
+/back/*.log
+
+# BlueJ files
+/back/*.ctxt
+
+# Mobile Tools for Java (J2ME)
+/back/.mtj.tmp/
+
+# Package Files #
+/back/*.jar
+/back/*.war
+/back/*.nar
+/back/*.ear
+/back/*.zip
+/back/*.tar.gz
+/back/*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+/back/hs_err_pid*
+/back/replay_pid*
+
+### Gradle ###
+/back/.gradle
+/back/**/build/
+/back/!src/**/build/
+
+# Ignore Gradle GUI config
+/back/gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+/back/!gradle-wrapper.jar
+
+# Avoid ignore Gradle wrappper properties
+/back/!gradle-wrapper.properties
+
+# Cache of project
+/back/.gradletasknamecache
+
+# Eclipse Gradle plugin generated files
+# Eclipse Core
+/back/.project
+# JDT-specific (Eclipse Java Development Tools)
+/back/.classpath
+
+### Gradle Patch ###
+# Java heap dump
+/back/*.hprof
+
+# End of https://www.toptal.com/developers/gitignore/api/java,gradle
