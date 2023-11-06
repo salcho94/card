@@ -90,5 +90,5 @@
 ### Gradle Patch ###
 # Java heap dump
 /back/*.hprof
-
+/back/**/application.properties
 # End of https://www.toptal.com/developers/gitignore/api/java,gradle
