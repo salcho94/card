@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7473ecaa-b5de-4f0d-ac81-194c53c520c6" name="Changes" comment="change project">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "salcho94"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="e10f79ad-30b3-405a-97fa-56efef54642b" />
+        <option name="url" value="https://github.com/salcho94/salcho_full.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2Xo2xl5syxE3xp65TLblsFXI012" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/salcho_full",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\salcho_full\front" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\salcho_full" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7473ecaa-b5de-4f0d-ac81-194c53c520c6" name="Changes" comment="" />
+      <created>1699281360990</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699281360990</updated>
+      <workItem from="1699281362016" duration="1632000" />
+      <workItem from="1699283026981" duration="502000" />
+    </task>
+    <task id="LOCAL-00001" summary="change project">
+      <option name="closed" value="true" />
+      <created>1699282119064</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1699282119064</updated>
+    </task>
+    <task id="LOCAL-00002" summary="change project">
+      <option name="closed" value="true" />
+      <created>1699282315007</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1699282315007</updated>
+    </task>
+    <task id="LOCAL-00003" summary="change project">
+      <option name="closed" value="true" />
+      <created>1699282330478</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1699282330478</updated>
+    </task>
+    <task id="LOCAL-00004" summary="change project">
+      <option name="closed" value="true" />
+      <created>1699282596687</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1699282596687</updated>
+    </task>
+    <task id="LOCAL-00005" summary="change project">
+      <option name="closed" value="true" />
+      <created>1699282642043</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1699282642043</updated>
+    </task>
+    <task id="LOCAL-00006" summary="change project">
+      <option name="closed" value="true" />
+      <created>1699282663088</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1699282663088</updated>
+    </task>
+    <task id="LOCAL-00007" summary="change project">
+      <option name="closed" value="true" />
+      <created>1699282715097</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1699282715097</updated>
+    </task>
+    <task id="LOCAL-00008" summary="change project">
+      <option name="closed" value="true" />
+      <created>1699283299138</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1699283299138</updated>
+    </task>
+    <task id="LOCAL-00009" summary="change project">
+      <option name="closed" value="true" />
+      <created>1699283454382</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1699283454382</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="change project" />
+    <option name="LAST_COMMIT_MESSAGE" value="change project" />
+  </component>
+</project>
