@@ -54,10 +54,10 @@ HELP.md
 
 ### NetBeans ###
 ./back/salcho//nbproject/private/
-./back/salcho//nbbuild/
-./back/salcho//dist/
-./back/salcho//nbdist/
-./back/salcho//.nb-gradle/
+./back/salcho/nbbuild/
+./back/salcho/dist/
+./back/salcho/nbdist/
+./back/salcho/.nb-gradle/
 
 ### VS Code ###
 ./back/salcho/.vscode/
