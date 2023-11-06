@@ -62,3 +62,6 @@ HELP.md
 ### VS Code ###
 ./back/salcho/.vscode/
 
+
+./back/salcho/src/main/resources
+

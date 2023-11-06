@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+<!-- Mybatis 관련 설정 작성하기 * 아래 순서 중요, 바뀌면 안됨! -->
+<!-- SqlSessionTemplate 관련 설정 -->
+<settings>
+    <setting name="mapUnderscoreToCamelCase" value="true"/>
+    <setting name="jdbcTypeForNull" value="NULL"/>
+</settings>
+
+<!-- 별칭 작성 부분 -->
+<typeAliases>
+    <typeAlias type="com.back.salcho.board.entity.BoardEntity" alias="boardEntity"/>
+</typeAliases>
+
+<!-- SQL이 작성되는 mapper 파일 위치 등록 -->
+<mappers>
+    <mapper resource="/mappers/BoardMapper.xml"/>
+</mappers>
+
+
+
+</configuration>
