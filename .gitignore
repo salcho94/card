@@ -86,7 +86,7 @@
 /back/.project
 # JDT-specific (Eclipse Java Development Tools)
 /back/.classpath
-
+back/src/main/resources
 ### Gradle Patch ###
 # Java heap dump
 /back/*.hprof
