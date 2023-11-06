@@ -1,71 +1,48 @@
 /*eslint-disable*/
-import {useState, useEffect} from "react";
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import axios  from "axios";
 import './App.css';
 
-import React from 'react'
-import Carousel from 'react-bootstrap/Carousel';
-import ReactAudioPlayer from 'react-audio-player';
+import NavBar  from './components/common/NavBar';
+import MainList  from './components/main/MainList';
+import RecentView from './components/common/RecentView';
 
-import loveSong from "./love.mp3";
+import Footer from "./components/common/Footer";
+import About from "./components/About";
 
+import {Routes, Route, Link, Outlet} from 'react-router-dom'
+import Error from "./components/common/Error";
+import {createContext, lazy, Suspense, useEffect, useState} from "react";
+import data from "./data";
 
+// 바로 로드할필요 없으니까 천천히 렌더링 하라는 함수
+const Detail = lazy(() => import("./components/detail/Detail.js"));
+const Cart = lazy(() => import("./components/cart/Cart.js"));
 function App() {
-    const [history,setHistory]=useState([1,2,3])
-    const [data,setData] =useState([])
-    const [writeYn,setWriteYn] =useState(false)
 
-  useEffect(() => {
-    axios.get('/api/board/list')
-        .then(res => {
-          let boardList = [...res.data];
-          setData(boardList);
-        })
-        .catch(err => console.log(err))
-  },[])
+
+    const [shoes,setShoes] = useState(data)
+    let [recentItem,setRecentItem] = useState([]);
+    if(!localStorage.getItem('watched')){
+        localStorage.setItem('watched', JSON.stringify( [] ))
+    }
+
 
   return (
+
     <div className="App">
-        <div className="white">
-            <strong >❤사랑하는 뽀둥이❤</strong>
-            <strong>700일</strong>
-        </div>
-                <section className="slider container mb-3">
-                    <Carousel>
-                        {
-                            history.map(x => {
-                                return(
-                                    <Carousel.Item className='slide'>
-                                        <Card style={{ width: '100%' }}>
-                                            <Card.Img variant="top"  src={`/img/test${x}.JPG`}/>
-                                            <Card.Body>
-                                                <Card.Title>Card Title</Card.Title>
-                                                <Card.Text>
-                                                    Some quick example text to build on the card title and make up the
-                                                    bulk of the card's content.
-                                                </Card.Text>
-                                                <Button variant="primary">Go somewhere</Button>
-                                            </Card.Body>
-                                        </Card>
-                                    </Carousel.Item>
-                                )
-                            })
-                        }
-
-
-                    </Carousel>
-                </section>
-            <ReactAudioPlayer
-                src={loveSong}
-                autoPlay
-                controls
-            />
+        <NavBar />
+        <RecentView shoes ={shoes} setRecentItem = {setRecentItem} recentItem={recentItem}/>
+        <Suspense fallback={<div>loding...</div>}>
+        <Routes>
+            <Route path ="/" element={<MainList shoes={shoes} setShoes={setShoes}/>}/>
+            <Route path ="/detail/:id" element={<Detail shoes={shoes} />}/>
+            <Route path ="/cart" element={<Cart/>}/>
+            <Route path ="/about" element={<About/>}/>
+            <Route path ="*" element={<Error/>}/>
+        </Routes>
+        </Suspense>
+        <Footer />
     </div>
   );
-
 }
-
 
 export default App;

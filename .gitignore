@@ -1,0 +1,63 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/front/node_modules
+/front/.pnp
+/front.pnp.js
+
+# testing
+/front/coverage
+
+# production
+/front/build
+
+# misc
+/front/.DS_Store
+/front/.env.local
+/front/.env.development.local
+/front/.env.test.local
+/front/.env.production.local
+
+/front/npm-debug.log*
+/front/yarn-debug.log*
+/front/yarn-error.log*
+
+
+HELP.md
+./back/salcho/gradle
+./back/salcho/build/
+./back/salcho/!gradle/wrapper/gradle-wrapper.jar
+./back/salcho/!**/src/main/**/build/
+./back/salcho/!**/src/test/**/build/
+
+### STS ###
+./back/salcho/.apt_generated
+./back/salcho/.classpath
+./back/salcho/.factorypath
+./back/salcho/.project
+./back/salcho/.settings
+./back/salcho/.springBeans
+./back/salcho/.sts4-cache
+./back/salcho/bin/
+./back/salcho/!**/src/main/**/bin/
+./back/salcho/!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+./back/salcho/.idea
+./back/salcho/*.iws
+./back/salcho/*.iml
+./back/salcho/*.ipr
+./back/salcho/out/
+./back/salcho/!**/src/main/**/out/
+./back/salcho/!**/src/test/**/out/
+
+### NetBeans ###
+./back/salcho//nbproject/private/
+./back/salcho//nbbuild/
+./back/salcho//dist/
+./back/salcho//nbdist/
+./back/salcho//.nb-gradle/
+
+### VS Code ###
+./back/salcho/.vscode/
+
