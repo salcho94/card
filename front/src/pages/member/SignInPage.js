@@ -16,7 +16,7 @@ import {useNavigate} from "react-router-dom";
 function SignInPage(props) {
     let navigate = useNavigate();
     let dispatch = useDispatch()
-    let KakaoLoginAPI = `https://kauth.kakao.com/oauth/authorize?client_id=3241a5985286c01f380dfa804a5a8613&redirect_uri=http://192.168.123.122:3000/kakaoLogin&response_type=code`;
+    let KakaoLoginAPI = `https://kauth.kakao.com/oauth/authorize?client_id=3241a5985286c01f380dfa804a5a8613&redirect_uri=${process.env.REACT_APP_KAKAO_LOGIN}/kakaoLogin&response_type=code`;
 
     const openKakaoLogin = () => {
         window.open(KakaoLoginAPI, "_self");

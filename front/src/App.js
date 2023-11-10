@@ -23,9 +23,8 @@ const KakaoLogin = lazy(() => import("./pages/member/KakaoLogin.js"));
 /*global Kakao*/
 
 const kakaoClientId = '3241a5985286c01f380dfa804a5a8613';
-const kakaoRedirectUri = 'http://192.168.123.122:3000/kakaoLogin';
-const loginUri = `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoClientId}\
-&redirect_uri=${kakaoRedirectUri}&response_type=code`;
+const kakaoRedirectUri = `${process.env.REACT_APP_KAKAO_LOGIN}/kakaoLogin`;
+const loginUri = `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoClientId}&redirect_uri=${kakaoRedirectUri}&response_type=code`;
 function App() {
 
 
@@ -49,7 +48,7 @@ function App() {
                     <Route path ="/cart" element={<Cart/>}/>
                     <Route path ="/signup" element={<SignUpPage/>}/>
                     <Route path ="/signin" element={<SignInPage/>}/>
-                    <Route path ="/kakaoLogin" kakaoRedirectUri={kakaoRedirectUri} element={<KakaoLogin/>}/>
+                    <Route path ="/kakaoLogin" element={<KakaoLogin/>}/>
                     <Route path ="/about" element={<About/>}/>
                     <Route path ="*" element={<Error/>}/>
                 </Routes>

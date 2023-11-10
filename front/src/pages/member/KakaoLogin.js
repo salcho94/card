@@ -4,8 +4,10 @@ import qs from "qs";
 import { useNavigate } from 'react-router-dom';
 import {setUser} from "../../store/user";
 import {useDispatch} from "react-redux";
-const  KakaoLogin = ({kakaoRedirectUri}) => {
-    const REST_API_KEY = '3241a5985286c01f380dfa804a5a8613';
+const  KakaoLogin = () => {
+    const kakaoClientId = '3241a5985286c01f380dfa804a5a8613';
+    const kakaoRedirectUri = `${process.env.REACT_APP_KAKAO_LOGIN}/kakaoLogin`;
+    const REST_API_KEY = kakaoClientId;
     const REDIRECT_URI = kakaoRedirectUri;
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -65,7 +67,7 @@ const  KakaoLogin = ({kakaoRedirectUri}) => {
 
     return (
         <div>
-            { accessToken }
+            <strong>로그인중 입니다 잠시만 기다려 주세요</strong>
         </div>
     );
 };

@@ -4,9 +4,8 @@ module.exports = function(app) {
     app.use(
         '/api',
         createProxyMiddleware({
-            target: process.env ,
-            changeOrigin: true,
-            pathRewrite: { '^/api': '' }
+            target: "http://localhost:8080" ,
+            changeOrigin: true
         })
     );
 };
