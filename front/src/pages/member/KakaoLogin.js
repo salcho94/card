@@ -9,7 +9,7 @@ const  KakaoLogin = ({kakaoRedirectUri}) => {
     const REDIRECT_URI = kakaoRedirectUri;
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    let accessToken = '';
     const code = new URL(window.location.href).searchParams.get("code");
 
     const goToHome = () => {
@@ -40,17 +40,12 @@ const  KakaoLogin = ({kakaoRedirectUri}) => {
                 payload
 
             );
-
-            getUser(res.data.access_token).then(res=>{
-                localStorage.setItem("user", JSON.stringify( {nickName:res.data.nickName,email:res.data.email,type:"normal"}))
-                dispatch(setUser({nickName:res.data.nickName, email:res.data.email,type:"normal"}));
-                goToHome();
-            });
+            accessToken = res.data.access_token
             // Kakao Javascript SDK 초기화
             window.Kakao.init(REST_API_KEY);
             // access token 설정
             window.Kakao.Auth.setAccessToken(res.data.access_token);
-            navigate("/profile");
+
 
         } catch (err) {
             console.log(err);
@@ -60,6 +55,13 @@ const  KakaoLogin = ({kakaoRedirectUri}) => {
 
     useEffect(() => {
         getToken();
+        if(accessToken){
+            getUser(accessToken).then(res=>{
+                localStorage.setItem("user", JSON.stringify( {nickName:res.data.nickName,email:res.data.email,type:"normal"}))
+                dispatch(setUser({nickName:res.data.nickName, email:res.data.email,type:"normal"}));
+                goToHome();
+            });
+        }
     }, []);
 
     return (
