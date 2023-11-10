@@ -1,7 +1,7 @@
 import Table from 'react-bootstrap/Table';
 import {useDispatch, useSelector} from "react-redux";
 import {plusCount, minusCount, deleteCart} from "../../store/cart";
-import {changeName} from "../../store/user";
+import {setUser} from "../../store/user";
 import Button from "react-bootstrap/Button";
 import {memo, useMemo, useState} from "react";
 
@@ -15,7 +15,7 @@ const Child = memo(({count}) => {
 const Cart = () => {
     //useMemo 사용법 최초에 한번만 실행한다.(렌더링시) 차이점 useEffect => 렌더링 후
     //let result = useMemo(() => {return 무거운함수()},[state])
-    let user = useSelector((state) => state.user);
+     let user = useSelector((state) => state.user);
     let cart = useSelector((state) => state.cart);
     let dispatch = useDispatch()
 // memo 사용법
@@ -24,7 +24,7 @@ const Cart = () => {
     return (
         <div>
             <div style={{padding:"50px"}}>
-                <h1>{user} 님의 장바구니</h1><button onClick={() =>{dispatch(changeName('se'))}}>full name</button>
+                <h1>{user.nickName} 님의 장바구니</h1><button onClick={() =>{dispatch(setUser('se'))}}>full name</button>
                 {/*<Child count ={count}></Child>
                 <button onClick={() => setCount(count+1)}>++</button>*/}
             </div>

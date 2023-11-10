@@ -6,6 +6,6 @@ import user from "./store/user";
 export default configureStore({
     reducer: {
        user : user.reducer,
-        cart : cart.reducer
+       cart : cart.reducer
     }
 })

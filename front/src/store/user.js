@@ -2,17 +2,26 @@ import {createSlice} from "@reduxjs/toolkit";
 
 let user = createSlice({
     name : 'user',
-    initialState :'ji sub',
+    initialState : {
+        nickName : ""
+        ,email : ""
+        ,type :"normal"
+    },
     reducers:{
-        changeName(state,action) {
-            if(state !== 'ji sub'){
-                return 'ji sub'
-            }else{
-                return action.payload + " " + state
+        setUser(state,action) {
+            state = action.payload
+            return action.payload
+        },
+        logOutUser(state){
+            state = {
+                nickName : ""
+                ,email : ""
+                ,type : "normal"
             }
+            return state;
         }
     }
 })
-export let { changeName } = user.actions
+export let { setUser,logOutUser } = user.actions
 
 export default user
