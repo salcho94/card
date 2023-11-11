@@ -29,6 +29,7 @@ const  KakaoLogin = () => {
         }
     }
     const getToken = async () => {
+
         const payload = qs.stringify({
             grant_type: "authorization_code",
             client_id: REST_API_KEY,
@@ -37,10 +38,18 @@ const  KakaoLogin = () => {
         });
         try {
             // access token 가져오기
+            const headers = {
+                'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'Accept': '*/*'
+            }
             const res = await axios.post(
                 "https://kauth.kakao.com/oauth/token",
-                payload
-
+                payload,
+          {
+                    headers: {
+                        "Content-type":"application/x-www-form-urlencoded;charset=utf-8"
+                    }
+                }
             );
             setAccessToken(res.data.access_token);
 

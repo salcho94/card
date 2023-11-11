@@ -6,8 +6,8 @@ import Form from 'react-bootstrap/Form';
 import {setUser} from "../../store/user";
 import InputGroup from 'react-bootstrap/InputGroup';
 import Container from 'react-bootstrap/Container';
-
-import Alert from 'react-bootstrap/Alert';
+import Image from 'react-bootstrap/Image';
+import kakaoBtn from './../../img/kakao.png'
 
 import {loginSubmit} from '../../apis/member/MemberApi'
 import {useNavigate} from "react-router-dom";
@@ -76,8 +76,11 @@ function SignInPage(props) {
                         aria-describedby="basic-addon3"
                     />
                 </InputGroup>
-                <Button className="align-content-center" variant="primary" onClick={() =>{openKakaoLogin()}}>카카오 로그인</Button>
-                <Button className="align-content-center" variant="primary" onClick={(e) =>{onLoginHandler(e)}}>로그인</Button>
+                <InputGroup className="mb-3" style={{ justifyContent : "center"}}>
+                    <Image src={kakaoBtn} rounded={true} roundedCircle={true}  style={{width:"40px" ,cursor:"pointer"}} onClick={() =>{openKakaoLogin()}} />
+                </InputGroup>
+                <Button className="align-content-center m-3" variant="success" onClick={() =>{navigate('/signup')}}>회원가입</Button>
+                <Button className="align-content-center m-3" variant="dark" onClick={(e) =>{onLoginHandler(e)}}>로그인</Button>
         </Container>
     )
 }

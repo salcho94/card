@@ -49,8 +49,8 @@ const NavBar = () => {
                             user.nickName ?
                             <Nav>
                                 <Nav.Link >
-                                    {user.nickName} 님
-                                    <button className="danger" onClick={() => {logOut()}} >
+                                    <strong className="m-2">{user.nickName} 님</strong>
+                                    <button variant="light"  className="logOut" onClick={() => {logOut()}} >
                                         logOut
                                     </button>
                                 </Nav.Link>

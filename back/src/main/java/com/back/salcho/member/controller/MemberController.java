@@ -29,7 +29,10 @@ public class MemberController {
     @ResponseBody
     public Map<String, String> duplicateCheck(@RequestParam String nickName) {
         Map<String, String> res = new HashMap<>();
-        MemberEntity member = memberService.duplicateCheck(nickName);
+        MemberEntity reqMember = new MemberEntity();
+        reqMember.setNickName(nickName);
+        reqMember.setType("normal");
+        MemberEntity member = memberService.duplicateCheck(reqMember);
         if(member == null) {
             res.put("msg","사용 가능한 닉네임 입니다.");
             res.put("success","Y");
@@ -62,7 +65,8 @@ public class MemberController {
     public Map<String, String> signin(MemberEntity memberEntity) {
         Map<String, String> res = new HashMap<>();
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        MemberEntity member = memberService.duplicateCheck(memberEntity.getNickName());
+        memberEntity.setType("normal");
+        MemberEntity member = memberService.duplicateCheck(memberEntity);
         if(member != null){
             if(encoder.matches(memberEntity.getPassword(), member.getPassword())){
                 MemberEntity result = new MemberEntity();
@@ -113,9 +117,20 @@ public class MemberController {
         long id = (long) jsonObj.get("id");
         String email = String.valueOf(account.get("email"));
         String nickName = String.valueOf(profile.get("nickname"));
-
+        MemberEntity reqMember = new MemberEntity();
+        reqMember.setNickName(nickName);
+        reqMember.setType("kakao");
+        MemberEntity member = memberService.duplicateCheck(reqMember);
+        int resultYn =0;
+        if(member == null) {
+            reqMember.setNickName(nickName);
+            reqMember.setEmail(email);
+            reqMember.setType("kakao");
+            resultYn = memberService.signupMember(reqMember);
+        }
         res.put("email",email);
         res.put("nickName",nickName);
+        res.put("success",(resultYn > 0 ? "Y" : "N"));
         return res;
     }
 }

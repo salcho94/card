@@ -1,9 +1,22 @@
+
 .main-bg{
   height: 300px;
+  width: auto;
   background-image: url('./img/bg_pain.jpg');
-  background-size: auto;
+  background-size: contain;
   background-position: center;
 }
+
+.logOut{
+  background: darkred;
+  color: snow;
+  border-radius: 50px;
+  text-align: center;
+  line-height: 20px;
+  height: 28px;
+  padding-bottom: 20px;
+}
+
 .footer{
   background: #2b3035;
   color: snow;
