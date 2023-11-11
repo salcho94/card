@@ -49,6 +49,7 @@ public class MemberController {
     @ResponseBody
     public Map<String, String> signup(MemberEntity memberEntity) {
         Map<String, String> res = new HashMap<>();
+        memberEntity.setType("normal");
         int result = memberService.signupMember(memberEntity);
         if(result>0){
             res.put("success","Y");
