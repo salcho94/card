@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface MemberMapper {
-    public MemberEntity  duplicateCheck(String nickName);
+    public MemberEntity  duplicateCheck(MemberEntity member);
 
     public int signupMember(MemberEntity member);
 

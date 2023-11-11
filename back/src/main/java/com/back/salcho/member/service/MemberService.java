@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface MemberService {
 
-    public MemberEntity  duplicateCheck(String nickName);
+    public MemberEntity  duplicateCheck(MemberEntity member);
 
     public int signupMember(MemberEntity member);
 

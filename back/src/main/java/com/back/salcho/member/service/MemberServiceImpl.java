@@ -16,13 +16,15 @@ public class MemberServiceImpl implements MemberService {
     MemberMapper memberMapper;
     @Autowired
     PasswordEncoder bCryptPasswordEncoder;
-    public MemberEntity  duplicateCheck(String nickName){
-        return memberMapper.duplicateCheck(nickName);
+    public MemberEntity  duplicateCheck(MemberEntity member){
+        return memberMapper.duplicateCheck(member);
     }
 
     @Override
     public int signupMember(MemberEntity member) {
-        member.hashPassword(bCryptPasswordEncoder);
+        if(member.getType().equals("normal")){
+            member.hashPassword(bCryptPasswordEncoder);
+        }
         return memberMapper.signupMember(member);
     }
 

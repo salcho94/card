@@ -17,6 +17,9 @@ public class MemberEntity {
     private Date regDate;
     private Date uptDate;
     private String target;
+    private String type;
+    private String auth;
+    private String delYn;
 
     public MemberEntity hashPassword(PasswordEncoder passwordEncoder) {
         this.password = passwordEncoder.encode(this.password);
