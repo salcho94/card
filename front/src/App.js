@@ -13,20 +13,16 @@ import Error from "./pages/common/Error";
 import {createContext, lazy, Suspense, useEffect, useState} from "react";
 import data from "./data";
 
+
 // 바로 로드할필요 없으니까 천천히 렌더링 하라는 함수 suspense 로딩중 보여줄 화면 지정
 const Detail = lazy(() => import("./pages/detail/Detail.js"));
 const Cart = lazy(() => import("./pages/cart/Cart.js"));
 const SignUpPage = lazy(() => import("./pages/member/SignUpPage.js"));
 const SignInPage = lazy(() => import("./pages/member/SignInPage.js"));
 const KakaoLogin = lazy(() => import("./pages/member/KakaoLogin.js"));
+const NaverLogin = lazy(() => import("./pages/member/NaverLogin.js"));
 
-/*global Kakao*/
-
-const kakaoClientId = '3241a5985286c01f380dfa804a5a8613';
-const kakaoRedirectUri = `${process.env.REACT_APP_KAKAO_LOGIN}/kakaoLogin`;
-const loginUri = `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoClientId}&redirect_uri=${kakaoRedirectUri}&response_type=code`;
 function App() {
-
 
     const [shoes,setShoes] = useState(data)
     let [recentItem,setRecentItem] = useState([]);
@@ -49,6 +45,7 @@ function App() {
                     <Route path ="/signup" element={<SignUpPage/>}/>
                     <Route path ="/signin" element={<SignInPage/>}/>
                     <Route path ="/kakaoLogin" element={<KakaoLogin/>}/>
+                    <Route path ="/naverLogin" element={<NaverLogin/>}/>
                     <Route path ="/about" element={<About/>}/>
                     <Route path ="*" element={<Error/>}/>
                 </Routes>

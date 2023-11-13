@@ -87,51 +87,5 @@ public class MemberController {
     return res;
     }
 
-    @GetMapping("/api/kakao")
-    @ResponseBody
-    public Map<String,String> kakaoCallback(@RequestParam String accessToken) {
-        Map<String, String> res = new HashMap<>();
-            HttpHeaders headers = new HttpHeaders();
-            headers.add("Authorization", "Bearer " + accessToken);
-            headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 
-            //HttpHeader 담기
-            RestTemplate rt = new RestTemplate();
-            HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(headers);
-            ResponseEntity<String> response = rt.exchange(
-                    "https://kapi.kakao.com/v2/user/me",
-                    HttpMethod.POST,
-                    httpEntity,
-                    String.class
-            );
-        //Response 데이터 파싱
-        JSONParser jsonParser = new JSONParser();
-        JSONObject jsonObj    = null;
-        try {
-            jsonObj = (JSONObject) jsonParser.parse(response.getBody());
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-        JSONObject account = (JSONObject) jsonObj.get("kakao_account");
-        JSONObject profile = (JSONObject) account.get("profile");
-
-        long id = (long) jsonObj.get("id");
-        String email = String.valueOf(account.get("email"));
-        String nickName = String.valueOf(profile.get("nickname"));
-        MemberEntity reqMember = new MemberEntity();
-        reqMember.setNickName(nickName);
-        reqMember.setType("kakao");
-        MemberEntity member = memberService.duplicateCheck(reqMember);
-        int resultYn =0;
-        if(member == null) {
-            reqMember.setNickName(nickName);
-            reqMember.setEmail(email);
-            reqMember.setType("kakao");
-            resultYn = memberService.signupMember(reqMember);
-        }
-        res.put("email",email);
-        res.put("nickName",nickName);
-        res.put("success",(resultYn > 0 ? "Y" : "N"));
-        return res;
-    }
 }

@@ -8,6 +8,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import kakaoBtn from './../../img/kakao.png'
+import naverBtn from './../../img/naver.png'
 
 import {loginSubmit} from '../../apis/member/MemberApi'
 import {useNavigate} from "react-router-dom";
@@ -16,10 +17,13 @@ import {useNavigate} from "react-router-dom";
 function SignInPage(props) {
     let navigate = useNavigate();
     let dispatch = useDispatch()
-    let KakaoLoginAPI = `https://kauth.kakao.com/oauth/authorize?client_id=3241a5985286c01f380dfa804a5a8613&redirect_uri=${process.env.REACT_APP_KAKAO_LOGIN}/kakaoLogin&response_type=code`;
-
+    let KakaoLoginAPI = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_KAKAO_LOGIN}/kakaoLogin&response_type=code`;
+    let NaverLoginApi = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.REACT_APP_NAVER_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_NAVER_LOGIN}/naverLogin`;
     const openKakaoLogin = () => {
         window.open(KakaoLoginAPI, "_self");
+    };
+    const openNaverLogin = () => {
+        window.open(NaverLoginApi, "_self");
     };
     const goToHome = () => {
         navigate("/");
@@ -77,7 +81,8 @@ function SignInPage(props) {
                     />
                 </InputGroup>
                 <InputGroup className="mb-3" style={{ justifyContent : "center"}}>
-                    <Image src={kakaoBtn} rounded={true} roundedCircle={true}  style={{width:"40px" ,cursor:"pointer"}} onClick={() =>{openKakaoLogin()}} />
+                    <Image src={kakaoBtn} rounded={true} roundedCircle={true}  style={{width:"40px" ,marginRight:"25px",cursor:"pointer"}} onClick={() =>{openKakaoLogin()}} />
+                    <Image src={naverBtn} rounded={true} roundedCircle={true}  style={{width:"40px" ,marginLeft:"25px",cursor:"pointer"}} onClick={() =>{openNaverLogin()}} />
                 </InputGroup>
                 <Button className="align-content-center m-3" variant="success" onClick={() =>{navigate('/signup')}}>회원가입</Button>
                 <Button className="align-content-center m-3" variant="dark" onClick={(e) =>{onLoginHandler(e)}}>로그인</Button>

@@ -5,10 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import {setUser} from "../../store/user";
 import {useDispatch} from "react-redux";
 const  KakaoLogin = () => {
-    const kakaoClientId = '3241a5985286c01f380dfa804a5a8613';
-    const kakaoRedirectUri = `${process.env.REACT_APP_KAKAO_LOGIN}/kakaoLogin`;
-    const REST_API_KEY = kakaoClientId;
-    const REDIRECT_URI = kakaoRedirectUri;
+    const REST_API_KEY = `${process.env.REACT_APP_KAKAO_CLIENT_ID}`;
+    const REDIRECT_URI = `${process.env.REACT_APP_KAKAO_LOGIN}/kakaoLogin`;
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [accessToken,setAccessToken] = useState('');
@@ -66,7 +64,7 @@ const  KakaoLogin = () => {
     getToken();
     if(accessToken){
         getUser(accessToken).then(res=>{
-            localStorage.setItem("user", JSON.stringify( {nickName:res.data.nickName,email:res.data.email,type:"normal"}))
+            localStorage.setItem("user", JSON.stringify( {nickName:res.data.nickName,email:res.data.email,type:"kakao"}))
             dispatch(setUser({nickName:res.data.nickName, email:res.data.email,type:"kakao"}));
             goToHome();
         });
