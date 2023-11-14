@@ -7,6 +7,7 @@ let user = createSlice({
         , nickName : ""
         ,email : ""
         ,type :"normal"
+        ,target :"0"
     },
     reducers:{
         setUser(state,action) {
@@ -15,14 +16,20 @@ let user = createSlice({
         },
         logOutUser(state){
             state = {
-                nickName : ""
+                userId : ""
+                ,nickName : ""
                 ,email : ""
                 ,type : "normal"
+                ,target :"0"
             }
+            return state;
+        },
+        updateReduceTarget(state,action){
+            state.target = action.payload;
             return state;
         }
     }
 })
-export let { setUser,logOutUser } = user.actions
+export let { setUser,logOutUser ,updateReduceTarget} = user.actions
 
 export default user

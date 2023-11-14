@@ -41,15 +41,14 @@ const NavBar = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link onClick={() => {navigator('/')}}>Home</Nav.Link>
-                            <Nav.Link onClick={() => {navigator('/cart')}}>Cart</Nav.Link>
-
+                          {/*  <Nav.Link onClick={() => {navigator('/')}}>Home</Nav.Link>*/}
+                            
                         </Nav>
                         {
                             user.nickName ?
                             <Nav>
                                 <Nav.Link >
-                                    <strong className="m-2">{user.nickName} 님</strong>
+                                    <strong className="m-2" onClick={() => navigator('/mypage')}>{user.nickName} 님</strong>
                                     <button variant="light"  className="logOut" onClick={() => {logOut()}} >
                                         logOut
                                     </button>

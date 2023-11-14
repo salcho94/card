@@ -64,9 +64,8 @@ const  KakaoLogin = () => {
     getToken();
     if(accessToken){
         getUser(accessToken).then(res=>{
-            console.log(res)
-            localStorage.setItem("user", JSON.stringify( {userId:res.data.id,nickName:res.data.nickName,email:res.data.email,type:res.data.type}))
-            dispatch(setUser({userId:res.data.id,nickName:res.data.nickName, email:res.data.email,type:res.data.type}));
+            localStorage.setItem("user", JSON.stringify( {userId:res.data.id,nickName:res.data.nickName,email:res.data.email,type:res.data.type,target:res.data.target}))
+            dispatch(setUser({userId:res.data.id,nickName:res.data.nickName, email:res.data.email,type:res.data.type,target:res.data.target}));
             goToHome();
         });
     }
