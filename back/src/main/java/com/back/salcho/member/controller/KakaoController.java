@@ -61,15 +61,24 @@ public class KakaoController {
         reqMember.setType("kakao");
         MemberEntity member = memberService.duplicateCheck(reqMember);
         int resultYn =0;
+        res.put("email",email);
+        res.put("nickName",nickName);
+
+        reqMember.setNickName(nickName);
+        reqMember.setEmail(email);
+
         if(member == null) {
-            reqMember.setNickName(nickName);
-            reqMember.setEmail(email);
             reqMember.setType("kakao");
             resultYn = memberService.signupMember(reqMember);
         }
-        res.put("email",email);
-        res.put("nickName",nickName);
-        res.put("success",(resultYn > 0 ? "Y" : "N"));
+
+        MemberEntity getMember = memberService.duplicateCheck(reqMember);
+        res.put("id", String.valueOf(getMember.getMemberId()));
+        res.put("type",getMember.getType());
+        res.put("success",resultYn > 0 ? "Y" : "N");
+
+
+
         return res;
     }
 

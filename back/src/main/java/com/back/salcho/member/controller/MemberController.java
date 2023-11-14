@@ -68,12 +68,16 @@ public class MemberController {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         memberEntity.setType("normal");
         MemberEntity member = memberService.duplicateCheck(memberEntity);
+        System.out.println(member);
         if(member != null){
+            System.out.println("test");
             if(encoder.matches(memberEntity.getPassword(), member.getPassword())){
                 MemberEntity result = new MemberEntity();
                 result = memberService.loginMember(memberEntity);
+                res.put("id",String.valueOf(result.getMemberId()));
                 res.put("nickName",result.getNickName());
                 res.put("email",result.getEmail());
+                res.put("type",result.getType());
                 res.put("success","Y");
             }else{
                 res.put("success","N");

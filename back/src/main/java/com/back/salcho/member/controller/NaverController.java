@@ -97,17 +97,18 @@ public class NaverController {
         }
         reqMember.setType("naver");
         MemberEntity member = memberService.duplicateCheck(reqMember);
+        reqMember.setEmail(infoResponseMap.get("email"));
+        reqMember.setNickName(infoResponseMap.get("name"));
 
         if(member == null) {
-            reqMember.setEmail(infoResponseMap.get("email"));
-            reqMember.setNickName(infoResponseMap.get("name"));
             reqMember.setType("naver");
             resultYn = memberService.signupMember(reqMember);
-            if(resultYn>0){
-                infoResponseMap.put("success","Y");
-            }
         }
 
+        MemberEntity getMember = memberService.duplicateCheck(reqMember);
+        infoResponseMap.put("id", String.valueOf(getMember.getMemberId()));
+        infoResponseMap.put("type",getMember.getType());
+        infoResponseMap.put("success",resultYn>0 ?"Y" :"N");
         // 결과 반환
         return infoResponseMap;
     }
