@@ -108,6 +108,7 @@ public class NaverController {
         MemberEntity getMember = memberService.duplicateCheck(reqMember);
         infoResponseMap.put("id", String.valueOf(getMember.getMemberId()));
         infoResponseMap.put("type",getMember.getType());
+        infoResponseMap.put("target",getMember.getTarget());
         infoResponseMap.put("success",resultYn>0 ?"Y" :"N");
         // 결과 반환
         return infoResponseMap;

@@ -75,6 +75,7 @@ public class MemberController {
                 MemberEntity result = new MemberEntity();
                 result = memberService.loginMember(memberEntity);
                 res.put("id",String.valueOf(result.getMemberId()));
+                res.put("target",result.getTarget());
                 res.put("nickName",result.getNickName());
                 res.put("email",result.getEmail());
                 res.put("type",result.getType());
@@ -92,4 +93,20 @@ public class MemberController {
     }
 
 
+    @PostMapping("/api/member/updateTarget")
+    @ResponseBody
+    public Map<String, String> updateTarget(MemberEntity memberEntity) {
+        Map<String, String> res = new HashMap<>();
+        int result = memberService.updateTarget(memberEntity);
+
+        if(result > 0) {
+            res.put("msg","목표금액이 설정되었습니다.");
+            res.put("success","Y");
+        }else{
+            res.put("msg","목표금액이 설정 실패.");
+            res.put("success","N");
+        }
+
+        return res;
+    }
 }

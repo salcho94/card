@@ -11,5 +11,7 @@ public interface MemberService {
 
     public int signupMember(MemberEntity member);
 
+    public int updateTarget(MemberEntity member);
+
     public MemberEntity loginMember(MemberEntity member);
 }

@@ -75,6 +75,7 @@ public class KakaoController {
         MemberEntity getMember = memberService.duplicateCheck(reqMember);
         res.put("id", String.valueOf(getMember.getMemberId()));
         res.put("type",getMember.getType());
+        res.put("target",getMember.getTarget());
         res.put("success",resultYn > 0 ? "Y" : "N");
 
 

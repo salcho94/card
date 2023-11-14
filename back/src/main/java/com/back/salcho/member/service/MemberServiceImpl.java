@@ -29,6 +29,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public int updateTarget(MemberEntity member) {
+        return memberMapper.updateTarget(member);
+    }
+
+    @Override
     public MemberEntity loginMember(MemberEntity member) {
         member.hashPassword(bCryptPasswordEncoder);
         System.out.println(member.getPassword());
