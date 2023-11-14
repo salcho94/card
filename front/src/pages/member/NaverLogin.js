@@ -22,8 +22,9 @@ const NaverLogin = () => {
 
         const res = await axios.get(`/api/naver?code=${code}`); // 스프링 API서버에 code값을 담아 로그인 요청
         if (res.data) {
-            localStorage.setItem("user", JSON.stringify( {userId:res.data.id,nickName:res.data.nickName,email:res.data.email,type:res.data.type}))
-            dispatch(setUser({userId:res.data.id,nickName:res.data.nickName, email:res.data.email,type:res.data.type}));
+            console.log(res.data)
+            localStorage.setItem("user", JSON.stringify( {userId:res.data.id,nickName:res.data.name,email:res.data.email,type:res.data.type}))
+            dispatch(setUser({userId:res.data.id,nickName:res.data.name, email:res.data.email,type:res.data.type}));
             goToHome();
         }
     };
