@@ -41,8 +41,8 @@ function SignInPage(props) {
             formData.append('password',password);
             loginSubmit(formData).then(res =>{
                 if(res.data.success === "Y"){
-                    localStorage.setItem("user", JSON.stringify( {nickName:res.data.nickName,email:res.data.email,type:"normal"}))
-                    dispatch(setUser({nickName:res.data.nickName, email:res.data.email,type:"normal"}));
+                    localStorage.setItem("user", JSON.stringify( {userId:res.data.id,nickName:res.data.nickName,email:res.data.email,"type":res.data.type}))
+                    dispatch(setUser({userId:res.data.id,nickName:res.data.nickName, email:res.data.email,type:res.data.type}));
                     goToHome();
                 }else if(res.data.success === "L"){
                     alert(res.data.msg);

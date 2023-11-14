@@ -76,7 +76,6 @@ function SignUpPage(props) {
     }
 
     const onPasswordHandler = (event) => {
-        console.log(event.target.value)
         let regex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,25}$/
         if(event.target.value == "" || regex.test(event.target.value)){
             setPassword(event.target.value);

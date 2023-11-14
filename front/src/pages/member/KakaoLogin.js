@@ -58,14 +58,15 @@ const  KakaoLogin = () => {
 
 
         } catch (err) {
-            console.log(err);
+            console.log("err");
         }
     };
     getToken();
     if(accessToken){
         getUser(accessToken).then(res=>{
-            localStorage.setItem("user", JSON.stringify( {nickName:res.data.nickName,email:res.data.email,type:"kakao"}))
-            dispatch(setUser({nickName:res.data.nickName, email:res.data.email,type:"kakao"}));
+            console.log(res)
+            localStorage.setItem("user", JSON.stringify( {userId:res.data.id,nickName:res.data.nickName,email:res.data.email,type:res.data.type}))
+            dispatch(setUser({userId:res.data.id,nickName:res.data.nickName, email:res.data.email,type:res.data.type}));
             goToHome();
         });
     }
