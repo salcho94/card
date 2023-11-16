@@ -23,7 +23,7 @@ const MainList = (props) => {
                         }
                     </div>
                     {delay ? <div>loding...</div>:null}
-                    {btnCount < 4 &&  <Button vaariant="secondary" onClick={() => {
+                    {btnCount < 4 &&  <Button variant="secondary" onClick={() => {
                         setDelay(true)
                         axios.get(`https://codingapple1.github.io/shop/data${btnCount}.json`)
                             .then((data) => {

@@ -29,6 +29,7 @@ const NavBar = () => {
     const logOut = () => {
         localStorage.removeItem('user')
         dispatch(logOutUser());
+        navigator("/");
     }
 
 

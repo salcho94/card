@@ -19,7 +19,6 @@ const  KakaoLogin = () => {
         try {
             //응답 성공
             const response = await axios.get(`/api/kakao?accessToken=${accessToken}`);
-            console.log(response.data);
             return response
         } catch (error) {
             //응답 실패

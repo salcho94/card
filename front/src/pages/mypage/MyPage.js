@@ -1,6 +1,5 @@
-import Table from 'react-bootstrap/Table';
+/*eslint-disable*/
 import {useDispatch, useSelector} from "react-redux";
-import {plusCount, minusCount, deleteCart} from "../../store/cart";
 import {updateReduceTarget} from "../../store/user";
 import Button from "react-bootstrap/Button";
 import {updateTarget} from '../../apis/mypage/MyPageApi'
@@ -14,17 +13,26 @@ import {useNavigate} from "react-router-dom";
 
 
 const MyPage = () => {
+    let now = new Date();	// 현재 날짜 및 시간
+    let year = now.getFullYear();	// 연도
+    let month = now.getMonth() + 1;	// 월
+
+    let lastday = new Date(year,0,31);
+
+    let day_calc = (lastday.getDate() - now.getDate())
+
+
+
     const user = useSelector((state) => state.user);
     const navigate = useNavigate();
     const array = Array.from({ length: 500 });
-    const [targetValue,setTargetValue] = useState("");
+    const [targetValue,setTargetValue] = useState("10000");
     const [targetYn,setTargetYn] = useState(true);
     const dispatch = useDispatch()
     useEffect(() =>{
         if(Number(user.target)> 0){
             setTargetYn(false);
         }
-
     },[user])
 
     const update = () => {
@@ -43,7 +51,7 @@ const MyPage = () => {
                         dispatch(updateReduceTarget(targetValue));
                         localStorage.setItem("user", JSON.stringify( {userId:user.userId,nickName:user.nickName,email:user.email,type:user.type,target:targetValue}))
                         alert("목표금액 설정이 완료되었습니다.");
-                        navigate('/mypage');
+                        window.location.reload();
                     }
                 })
             } else {
@@ -77,19 +85,22 @@ const MyPage = () => {
                         <Container className="p-5">
                             <ListGroup>
                                 <ListGroup.Item action variant="warning">
-                                    목표금액 : {user.target} 만원
+                                  <strong>{year}년 {month}월</strong> 목표금액 : <strong>{user.target}</strong> 원
                                 </ListGroup.Item>
                                 <ListGroup.Item action variant="warning">
-                                    사용금액 : 0 만원
+                                    <strong>{year}년 {month}월</strong> 사용금액 : <strong>0</strong> 원
                                 </ListGroup.Item>
                                 <ListGroup.Item action variant="warning">
-                                    이번주 사용가능 금액 : {user.target} 만원
+                                    <strong>{year}년 {month}월</strong> 사용가능 금액 : {user.target} 원
                                 </ListGroup.Item>
                                 <ListGroup.Item action variant="warning">
-                                    사용가능 금액 : {user.target} 만원
+                                    <strong>{year}년 {month}월</strong> 남은기간 :<strong>{day_calc}</strong> 일
                                 </ListGroup.Item>
                                 <ListGroup.Item action variant="warning">
-                                    남은기간 : 15일
+                                    금주 사용 금액 : {user.target} 원
+                                </ListGroup.Item>
+                                <ListGroup.Item action variant="warning">
+                                    금주 사용가능 금액 : {user.target} 원
                                 </ListGroup.Item>
                                 <ListGroup.Item action variant="warning">
                                     달성여부 : 달성
