@@ -40,11 +40,13 @@ const WishList = () => {
             setWishCate(res);
         });
         
-        console.log(cate)
-        getWishList(storeUser.userId,cate).then((res) => {
-           console.log(res,cate)
-           setWishList(res);
-        });
+        if(storeUser){
+            getWishList(storeUser.userId,cate).then((res) => {
+
+                setWishList(res);
+            });
+        }
+
     }, [cate]);
         return(
             <>
