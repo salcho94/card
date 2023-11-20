@@ -26,6 +26,36 @@ const Detail = () => {
         writer:"",
         regDate:""
     })
+    let items =  [
+        {
+            title : "상품명",
+            value : detail.itemTitle
+        },
+        {
+            title : "분류",
+            value : detail.cateName
+        },
+        {
+            title : "구매가격",
+            value : detail.itemPrice
+        },
+        {
+            title : "구매링크",
+            value : detail.itemLink
+        },
+        {
+            title : "구매이유",
+            value : detail.itemReason
+        },
+        {
+            title : "등록일",
+            value : detail.regDate
+        },
+        {
+            title : "구매희망자",
+            value : detail.writer
+        },
+    ]
 
     const deleteHandler = (id) =>{
         let formData = new FormData;
@@ -79,32 +109,7 @@ const Detail = () => {
                     <Card.Img variant="top" src={detail.imgPath  ? detail.imgPath  : noImg  }   style={{height:"500px"}} className="p-3"/>
                     <Card.Body>
                         {
-                            [
-                                {
-                                    title : "상품명",
-                                    value : detail.itemTitle
-                                }, 
-                                {
-                                    title : "분류",
-                                    value : detail.cateName
-                                },
-                                {
-                                    title : "구매링크",
-                                    value : detail.itemLink
-                                },
-                                {
-                                    title : "구매이유",
-                                    value : detail.itemReason
-                                },
-                                {
-                                    title : "등록일",
-                                    value : detail.regDate
-                                },
-                                {
-                                    title : "구매희망자",
-                                    value : detail.writer
-                                },
-                            ].map((data,index) => {
+                            items.map((data,index) => {
                                 return(
                                     <Row className="p-1" key={index}>
                                         <Col xs={4} md={4}>
