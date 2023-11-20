@@ -13,4 +13,10 @@ public interface WishListMapper {
     public int insertWishItem(WishListEntity wishListEntity);
 
     public List<Map<String,Object>> getWishList(WishListEntity wishListEntity);
+
+    public  Map<String,Object> getWishItem(String wishItemId);
+
+    public int deleteWishItem(String wishItemId);
+
+    public int wishDoneItem(String wishItemId);
 }

@@ -11,6 +11,7 @@ import java.util.Date;
 
 public class WishListEntity {
     private int memberId;
+    private int wishItemId;
     private MultipartFile imgFile;
     private String wishItemImgPath;
     private String wishSiteLink;
@@ -29,6 +30,7 @@ public class WishListEntity {
     public String toString() {
         return "WishListEntity{" +
                 "memberId=" + memberId +
+                ", wishItemId=" + wishItemId +
                 ", imgFile=" + imgFile +
                 ", wishItemImgPath='" + wishItemImgPath + '\'' +
                 ", wishSiteLink='" + wishSiteLink + '\'' +

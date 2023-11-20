@@ -98,12 +98,12 @@ const WishList = () => {
                                                                     return(
                                                                         <Col md="4" key={index}>
                                                                             <Card className="card-shadow m-3">
-                                                                                <img className="card-img-top" src={data.wishItmeImgPath ? data.wishItmeImgPath : noImg}  style={{height:"300px"}} alt="wrappixel kit" />
+                                                                                <img className="card-img-top" src={data.wishItmeImgPath ? data.wishItmeImgPath : noImg}  style={{height:"300px"}} alt="No IMG" />
                                                                                 <CardBody>
                                                                                     <h5 className="font-medium m-b-0">상품명:{data.wishItmeTitle}</h5>
                                                                                     <h5 className="font-medium m-b-0">가격:{data.wishItmePrice}원</h5>
                                                                                     <p>분류:{data.cateName}</p>
-                                                                                    <Button variant="primary" onClick={()=>{alert("준비중이에용")}}>상세보기</Button>
+                                                                                    <Button variant="primary" onClick={(()=>{navigate(`/detail/${data.wishItemId}`)})}>상세보기</Button>
                                                                                 </CardBody>
                                                                             </Card>
                                                                         </Col>
@@ -131,7 +131,7 @@ const WishList = () => {
                     :
                     <>
                         <div className="container">
-                            <Card.Subtitle className="mb-2 text-muted mb-3"><h2>지출 관리 홈페이지</h2></Card.Subtitle>
+                            <Card.Subtitle className="mb-2 text-muted mb-3"><h1>지출 관리 홈페이지</h1></Card.Subtitle>
                             <Card.Text className="p-3">
                                 안녕하세요 이 홈페이지는 지출을 효율적으로 관리하도록
                             </Card.Text>

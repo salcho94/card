@@ -7,13 +7,13 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
 import {setUser,logOutUser} from "../../store/user";
-
+import logo from "../../img/logo.png"
 const NavBar = () => {
 
     let navigator = useNavigate();
     let user = useSelector((state) => state.user);
-
     let dispatch = useDispatch();
+
     useEffect(()=>{
         if(JSON.parse(localStorage.getItem('user'))){
             dispatch(setUser(JSON.parse(localStorage.getItem('user'))));
@@ -38,7 +38,12 @@ const NavBar = () => {
         <>
             <Navbar expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
                 <Container>
-                    <Navbar.Brand onClick={() => {navigator('/')}} >salcho</Navbar.Brand>
+
+                        <Navbar.Brand onClick={() => {navigator('/')}} style={{ cursor:"pointer"}} >SALCHO</Navbar.Brand>
+                        {/* <Navbar.Brand onClick={() => {navigator('/')}} >
+                                    <img src={logo} style={{ cursor:"pointer",height: "55px", filter: "opacity(0.5) drop-shadow(0 0 0 #FFFFFF)"}}/>
+                        </Navbar.Brand>*/}
+
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">

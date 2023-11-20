@@ -28,4 +28,19 @@ public class WishListServiceImpl implements WishListService {
         return wishListMapper.getWishList(wishListEntity);
     }
 
+    @Override
+    public Map<String, Object> getWishItem(String wishItemId) {
+        return wishListMapper.getWishItem(wishItemId);
+    }
+
+    @Override
+    public int deleteWishItem(String wishItemId) {
+        return wishListMapper.deleteWishItem(wishItemId);
+    }
+
+    @Override
+    public int wishDoneItem(String wishItemId) {
+        return wishListMapper.wishDoneItem(wishItemId);
+    }
+
 }

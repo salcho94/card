@@ -26,13 +26,61 @@ public class WishListController {
     @GetMapping("/api/wish/getWishList")
     @ResponseBody
     public List<Map<String,Object>>  getWishList(@RequestParam String memberId,@RequestParam String cate) {
-        System.out.println(memberId);
         WishListEntity entity = new WishListEntity();
         entity.setWishItemCate(cate);
         entity.setMemberId(Integer.parseInt(memberId));
         List<Map<String,Object>> map =  wishListService.getWishList(entity);
-        System.out.println(map.toString());
         return map;
+    }
+
+    @GetMapping("/api/wish/getWishItem")
+    @ResponseBody
+    public Map<String,Object>  getWishItem(@RequestParam String wishItemId) {
+        Map<String,Object> map =  wishListService.getWishItem(wishItemId);
+        return map;
+    }
+
+    @PostMapping("/api/wish/deleteWishItem")
+    @ResponseBody
+    public Map<String, String> deleteWishItem( WishListEntity wishListEntity)  {
+        Map<String, String> res = new HashMap<>();
+        Map<String,Object> map =  wishListService.getWishItem(String.valueOf(wishListEntity.getWishItemId()));
+        if(map ==  null){
+            res.put("msg","데이터가 삭제되었거나 존재하지 않습니다.");
+            res.put("success","N");
+        }else{
+            int result = wishListService.deleteWishItem(String.valueOf(wishListEntity.getWishItemId()));
+            if(result > 0) {
+                res.put("msg", "삭제가 완료되었습니다.");
+                res.put("success", "Y");
+            }else{
+                res.put("msg", "삭제에 실패하였습니다.");
+                res.put("success", "N");
+            }
+        }
+        return res;
+    }
+
+
+    @PostMapping("/api/wish/wishDoneItem")
+    @ResponseBody
+    public Map<String, String> wishDoneItem( WishListEntity wishListEntity)  {
+        Map<String, String> res = new HashMap<>();
+        Map<String,Object> map =  wishListService.getWishItem(String.valueOf(wishListEntity.getWishItemId()));
+        if(map ==  null){
+            res.put("msg","데이터가 삭제되었거나 존재하지 않습니다.");
+            res.put("success","N");
+        }else{
+            int result = wishListService.wishDoneItem(String.valueOf(wishListEntity.getWishItemId()));
+            if(result > 0) {
+                res.put("msg", "구매확정 완료 마이페이지에서 확인해 주세요!");
+                res.put("success", "Y");
+            }else{
+                res.put("msg", "구매확정에 실패하였습니다.");
+                res.put("success", "N");
+            }
+        }
+        return res;
     }
 
     @GetMapping("/api/wish/getCode")
@@ -71,7 +119,7 @@ public class WishListController {
                 e.printStackTrace();
             }
         }
-        System.out.println(wishListEntity.toString());
+
         int result = wishListService.insertWishItem(wishListEntity);
         if(result >0){
             res.put("msg","상품이 추가되었습니다.");

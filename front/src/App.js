@@ -26,8 +26,6 @@ const CreateWishList = lazy(() => import("./pages/wish/CreateWishList.js"));
 
 function App() {
 
-    const [shoes,setShoes] = useState(data)
-
     let [recentItem,setRecentItem] = useState([]);
     if(!localStorage.getItem('watched')){
         localStorage.setItem('watched', JSON.stringify( [] ))
@@ -42,8 +40,8 @@ function App() {
         <Suspense fallback={<div>loding...</div>}>
             <div className="contentWrapper">
                 <Routes>
-                    <Route path ="/" element={<WishList shoes={shoes} setShoes={setShoes}/>}/>
-                    <Route path ="/detail/:id" element={<Detail shoes={shoes} />}/>
+                    <Route path ="/" element={<WishList/>}/>
+                    <Route path ="/detail/:id" element={<Detail/>}/>
                     <Route path ="/MyPage" element={<MyPage/>}/>
                     <Route path ="/signup" element={<SignUpPage/>}/>
                     <Route path ="/signin" element={<SignInPage/>}/>

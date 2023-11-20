@@ -13,9 +13,43 @@ export const getWishCode = async  () => {
 }
 export const getWishList = async  (memberId,cate) => {
     try {
-        console.log(memberId);
         //응답 성공
         const response = await axios.get(`/api/wish/getWishList?memberId=${memberId}&cate=${cate}`);
+        return response.data;
+    } catch (error) {
+        //응답 실패
+        console.error(error);
+    }
+}
+
+export const deleteWishItem = async  (body) => {
+    try {
+        //응답 성공
+        const response = await axios.post(`/api/wish/deleteWishItem`,body);
+        return response.data;
+    } catch (error) {
+        //응답 실패
+        console.error(error);
+    }
+}
+
+
+export const wishDoneItem = async  (body) => {
+    try {
+        //응답 성공
+        const response = await axios.post(`/api/wish/wishDoneItem`,body);
+        return response.data;
+    } catch (error) {
+        //응답 실패
+        console.error(error);
+    }
+}
+
+
+export const getWishItem = async  (wishItemId) => {
+    try {
+        //응답 성공
+        const response = await axios.get(`/api/wish/getWishItem?wishItemId=${wishItemId}`);
         return response.data;
     } catch (error) {
         //응답 실패
