@@ -20,6 +20,7 @@ const WishList = () => {
 
     const navigate = useNavigate();
     const [wishCate,setWishCate] =  useState([{codeId:'',cateName:''}])
+    const [wishState,setWishState] =  useState("N")
     const [cate,setCate] =  useState("all")
     let user = useSelector((state) => state.user);
 
@@ -31,6 +32,7 @@ const WishList = () => {
         ,wishItmePrice :''
         ,cateId:''
         ,cateName:''
+        ,buyYn:''
     }])
 
     useEffect(() => {
@@ -42,12 +44,12 @@ const WishList = () => {
         
         if(storeUser){
             getWishList(storeUser.userId,cate).then((res) => {
-
-                setWishList(res);
+                let wishItem = res.filter(x => x.buyYn == wishState)
+                setWishList(wishItem);
             });
         }
 
-    }, [cate]);
+    }, [cate,wishState]);
         return(
             <>
 
@@ -67,7 +69,7 @@ const WishList = () => {
                             </div>
                             <Container>
                                 <Row className="justify-content-center">
-                                    <Col md="7" className="text-center d-flex">
+                                    <Col md="12" className="text-center d-flex">
                                         <Button  className="btn  btn-dark m-3 w-75" onClick={() =>{navigate("/addWish")}}> 상품 추가</Button>
                                         <InputGroup className="m-3">
                                             <InputGroup.Text><strong>상품 카테고리</strong></InputGroup.Text>
@@ -80,6 +82,13 @@ const WishList = () => {
                                                         )
                                                     })
                                                 }
+                                            </Form.Select>
+                                        </InputGroup>
+                                        <InputGroup className="m-3">
+                                            <InputGroup.Text><strong>상품 상태</strong></InputGroup.Text>
+                                            <Form.Select aria-label="카테고리를 선택해 주세요" onChange={(e)=>{setWishState(e.target.value)}}>
+                                                <option value="N" >구매중</option>
+                                                <option value="Y" >구매완료</option>
                                             </Form.Select>
                                         </InputGroup>
                                     </Col>
@@ -103,7 +112,8 @@ const WishList = () => {
                                                                                     <h5 className="font-medium m-b-0">상품명:{data.wishItmeTitle}</h5>
                                                                                     <h5 className="font-medium m-b-0">가격:{data.wishItmePrice}원</h5>
                                                                                     <p>분류:{data.cateName}</p>
-                                                                                    <Button variant="primary" onClick={(()=>{navigate(`/detail/${data.wishItemId}`)})}>상세보기</Button>
+                                                                                    {data.buyYn == 'N' && <Button variant="primary" onClick={(()=>{navigate(`/detail/${data.wishItemId}`)})}>상세보기</Button>}
+                                                                                    {data.buyYn == 'Y' && <Button variant="success" onClick={(()=>{navigate(`/mypage`)})}>myPage!</Button>}
                                                                                 </CardBody>
                                                                             </Card>
                                                                         </Col>

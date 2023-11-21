@@ -11,3 +11,15 @@ export const updateTarget = async  (body) => {
         console.error(error);
     }
 }
+
+
+export const getStatistics = async  (body) => {
+    try {
+        //응답 성공
+        const response = await axios.post(`/api/member/getStatistics`,body);
+        return response
+    } catch (error) {
+        //응답 실패
+        console.error(error);
+    }
+}

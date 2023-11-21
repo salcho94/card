@@ -11,6 +11,17 @@ export const duplicateCheck = async  (nickName) => {
     }
 }
 
+export const getMember = async  (memberId) => {
+    try {
+        //응답 성공
+        const response = await axios.get(`/api/member/getMember?memberId=${memberId}`);
+        return response
+    } catch (error) {
+        //응답 실패
+        console.error(error);
+    }
+}
+
 
 export const submit = async  (body) => {
     try {

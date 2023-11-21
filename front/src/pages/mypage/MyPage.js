@@ -2,7 +2,8 @@
 import {useDispatch, useSelector} from "react-redux";
 import {updateReduceTarget} from "../../store/user";
 import Button from "react-bootstrap/Button";
-import {updateTarget} from '../../apis/mypage/MyPageApi'
+import {updateTarget,getStatistics} from '../../apis/mypage/MyPageApi'
+import {getMember} from '../../apis/member/MemberApi'
 import ListGroup from 'react-bootstrap/ListGroup';
 import Container from 'react-bootstrap/Container';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
@@ -16,9 +17,7 @@ const MyPage = () => {
     let now = new Date();	// 현재 날짜 및 시간
     let year = now.getFullYear();	// 연도
     let month = now.getMonth() + 1;	// 월
-
     let lastday = new Date(year,0,31);
-
     let day_calc = (lastday.getDate() - now.getDate())
 
 
@@ -26,21 +25,42 @@ const MyPage = () => {
     const user = useSelector((state) => state.user);
     const navigate = useNavigate();
     const array = Array.from({ length: 500 });
+    const [idYn,setIdYn] = useState(false);
     const [targetValue,setTargetValue] = useState("10000");
+    const [statist,setStatist] = useState({
+        dayUseMoney: "",
+        useCanMoney: "",
+        useMoney: "",
+        weekCanUseMoney: "",
+        weekUseMoney: ""
+    })
     const [targetYn,setTargetYn] = useState(true);
     const dispatch = useDispatch()
     useEffect(() =>{
-        if(Number(user.target)> 0){
-            setTargetYn(false);
+        if (user.userId !== "" ) {
+            getMember(user.userId).then(res =>{
+                dispatch(updateReduceTarget(res.data.target));
+            })
+            if(Number(user.target)> 0) {
+                setTargetYn(false);
+            }
+            let formData = new FormData;
+            formData.append('memberId', user.userId);
+            formData.append('target', user.target);
+            formData.append('month', year +'-'+month);
+
+            getStatistics(formData).then(res =>{
+                setStatist(res.data);
+            })
         }
-    },[user])
+    },[])
 
     const update = () => {
         if(user.target === document.getElementById('selectTarget').value){
             alert("기존 목표금액과 동일합니다.");
             return false;
         }else{
-            const formData = new FormData;
+            let formData = new FormData;
             setTargetValue(document.getElementById('selectTarget').value);
             formData.append('memberId', user.userId);
             formData.append('target', targetValue);
@@ -63,9 +83,19 @@ const MyPage = () => {
 
 
     return (
-            <div>
-                <h1>안녕하세요<strong> {user.nickName} </strong>님</h1>
+            <div className="p-1">
+                <div>
+                    <h1>안녕하세요<strong> {user.nickName} </strong>님</h1>
+                    {idYn &&
+
+                        <h1>고유 아이디<strong> {user.userId} </strong>입니다.</h1>
+                    }
+                    <button className="btn btn-success" onClick={() =>{
+                        setIdYn(!idYn);
+                    }}>고유 아이디 {!idYn ? '확인' : '숨김'}</button>
+                </div>
                 {
+
                     targetYn ?
                     <>
                         <Container className="p-5">
@@ -82,28 +112,47 @@ const MyPage = () => {
                         <Button onClick={() => update()}>Done</Button>
                     </> :
                     <>
-                        <Container className="p-5">
+                        <Container className="p-3">
                             <ListGroup>
-                                <ListGroup.Item action variant="warning">
+                                <ListGroup.Item action variant="info">
                                   <strong>{year}년 {month}월</strong> 목표금액 : <strong>{user.target}</strong> 원
                                 </ListGroup.Item>
-                                <ListGroup.Item action variant="warning">
-                                    <strong>{year}년 {month}월</strong> 사용금액 : <strong>0</strong> 원
+                                <ListGroup.Item action variant="info">
+                                    <strong>{year}년 {month}월</strong> 사용금액 : <strong>{statist.useMoney}</strong> 원
                                 </ListGroup.Item>
-                                <ListGroup.Item action variant="warning">
-                                    <strong>{year}년 {month}월</strong> 사용가능 금액 : {user.target} 원
+                                <ListGroup.Item action variant="info">
+                                    <strong>{year}년 {month}월</strong> 사용가능 금액 : {statist.useCanMoney < 0 ? '0' : statist.useCanMoney} 원
                                 </ListGroup.Item>
-                                <ListGroup.Item action variant="warning">
+                                <ListGroup.Item action variant="info">
                                     <strong>{year}년 {month}월</strong> 남은기간 :<strong>{day_calc}</strong> 일
                                 </ListGroup.Item>
-                                <ListGroup.Item action variant="warning">
-                                    금주 사용 금액 : {user.target} 원
+                                <ListGroup.Item action variant="light">
+                                    금주 사용 금액 : {statist.weekUseMoney} 원
                                 </ListGroup.Item>
-                                <ListGroup.Item action variant="warning">
-                                    금주 사용가능 금액 : {user.target} 원
+                                <ListGroup.Item action variant="light">
+                                    금주 사용가능 금액 : {statist.weekCanUseMoney < 0 ? '0' : statist.weekCanUseMoney} 원
                                 </ListGroup.Item>
+                                <ListGroup.Item action variant="light">
+                                    일일 사용가능 금액 : {statist.dayUseMoney} 원
+                                </ListGroup.Item>
+                                {
+                                    statist.useCanMoney < 0 &&
+                                    <ListGroup.Item action variant="danger">
+                                        초과 사용 금액 : <strong className="text-danger"> {Math.abs(statist.useCanMoney)} </strong>원
+                                    </ListGroup.Item>
+                                }
                                 <ListGroup.Item action variant="warning">
-                                    달성여부 : 달성
+                                    달성여부 :
+                                    {
+                                        user.target > statist.useMoney ?
+                                            <strong className="text-primary">
+                                                달성중
+                                            </strong>
+                                           :
+                                            <strong className="text-danger">
+                                                실패함!!!
+                                            </strong>
+                                    }
                                 </ListGroup.Item>
                             </ListGroup>
                         </Container>

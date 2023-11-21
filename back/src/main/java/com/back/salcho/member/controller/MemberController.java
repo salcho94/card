@@ -109,4 +109,27 @@ public class MemberController {
 
         return res;
     }
+
+    @PostMapping("/api/member/getStatistics")
+    @ResponseBody
+    public Map<String, Object> getStatistics(@RequestParam HashMap params) {
+
+        Map<String, String> reqMap = new HashMap<>();
+        reqMap.put("memberId",String.valueOf(params.get("memberId")));
+        reqMap.put("target",String.valueOf(params.get("target")));
+        reqMap.put("month",String.valueOf(params.get("month")));
+        Map<String,Object> res =  memberService.getStatistics(reqMap);
+
+
+        return res;
+    }
+
+
+    @GetMapping("/api/member/getMember")
+    @ResponseBody
+    public Map<String, String> getMember(@RequestParam String memberId) {
+        Map<String, String>  res = memberService.getMember(memberId);
+        res.put("userId",memberId);
+        return res;
+    }
 }

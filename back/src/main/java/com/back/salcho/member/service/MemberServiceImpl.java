@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -36,8 +38,17 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public MemberEntity loginMember(MemberEntity member) {
         member.hashPassword(bCryptPasswordEncoder);
-        System.out.println(member.getPassword());
         return memberMapper.loginMember(member);
+    }
+
+    @Override
+    public Map<String, Object> getStatistics(Map<String, String> reqMap) {
+        return memberMapper.getStatistics(reqMap);
+    }
+
+    @Override
+    public Map<String, String> getMember(String memberId) {
+        return memberMapper.getMember(memberId);
     }
 
 
