@@ -25,10 +25,12 @@ public class WishListController {
 
     @GetMapping("/api/wish/getWishList")
     @ResponseBody
-    public List<Map<String,Object>>  getWishList(@RequestParam String memberId,@RequestParam String cate) {
+    public List<Map<String,Object>>  getWishList(@RequestParam String memberId,@RequestParam String cate,@RequestParam String pageNum,@RequestParam String wishState) {
         WishListEntity entity = new WishListEntity();
         entity.setWishItemCate(cate);
+        entity.setPageNum(Integer.parseInt(pageNum));
         entity.setMemberId(Integer.parseInt(memberId));
+        entity.setBuyYn(wishState);
         List<Map<String,Object>> map =  wishListService.getWishList(entity);
         return map;
     }

@@ -21,19 +21,13 @@ const WishList = () => {
     const navigate = useNavigate();
     const [wishCate,setWishCate] =  useState([{codeId:'',cateName:''}])
     const [wishState,setWishState] =  useState("N")
+    const [isAddBtnYn,setIsAddBtnYn] =  useState(true)
+    const [pageNum,setPageNum] =  useState(0)
     const [cate,setCate] =  useState("all")
     let user = useSelector((state) => state.user);
 
 
-    const [wishList,setWishList] = useState([{
-        wishItemId:''
-        ,wishItmeTitle:''
-        ,wishItmeImgPath :''
-        ,wishItmePrice :''
-        ,cateId:''
-        ,cateName:''
-        ,buyYn:''
-    }])
+    const [wishList,setWishList] = useState([])
 
     useEffect(() => {
         let storeUser = JSON.parse(localStorage.getItem("user"));
@@ -43,13 +37,12 @@ const WishList = () => {
         });
         
         if(storeUser){
-            getWishList(storeUser.userId,cate).then((res) => {
-                let wishItem = res.filter(x => x.buyYn == wishState)
-                setWishList(wishItem);
+            getWishList(storeUser.userId,cate,pageNum,wishState).then((res) => {
+                setWishList(res);
             });
         }
 
-    }, [cate,wishState]);
+    }, [cate,wishState,pageNum]);
         return(
             <>
 
@@ -68,9 +61,8 @@ const WishList = () => {
                                 </div>
                             </div>
                             <Container>
-                                <Row className="justify-content-center">
-                                    <Col md="12" className="text-center d-flex">
-                                        <Button  className="btn  btn-dark m-3 w-75" onClick={() =>{navigate("/addWish")}}> 상품 추가</Button>
+                                <Row className="m-t-40">
+                                    <Col md="4">
                                         <InputGroup className="m-3">
                                             <InputGroup.Text><strong>상품 카테고리</strong></InputGroup.Text>
                                             <Form.Select aria-label="카테고리를 선택해 주세요" onChange={(e)=>{setCate(e.target.value)}}>
@@ -84,18 +76,22 @@ const WishList = () => {
                                                 }
                                             </Form.Select>
                                         </InputGroup>
-                                        <InputGroup className="m-3">
-                                            <InputGroup.Text><strong>상품 상태</strong></InputGroup.Text>
-                                            <Form.Select aria-label="카테고리를 선택해 주세요" onChange={(e)=>{setWishState(e.target.value)}}>
-                                                <option value="N" >구매중</option>
-                                                <option value="Y" >구매완료</option>
-                                            </Form.Select>
-                                        </InputGroup>
+                                    </Col>
+                                    <Col md="4">
+                                            <InputGroup className="m-3">
+                                                <InputGroup.Text><strong>상품 상태</strong></InputGroup.Text>
+                                                <Form.Select aria-label="상태를 선택해 주세요" onChange={(e)=>{setWishState(e.target.value)}}>
+                                                    <option value="N" >구매중</option>
+                                                    <option value="Y" >구매함!</option>
+                                                </Form.Select>
+                                            </InputGroup>
+                                    </Col>
+                                    <Col md="4">
+                                        <Button  className="btn  btn-dark m-3 w-75" onClick={() =>{navigate("/addWish")}}> 상품 추가</Button>
                                     </Col>
                                 </Row>
                             </Container>
                                     <div>
-
                                             <>
                                                 <div>
                                                     <div className="spacer">
@@ -121,6 +117,9 @@ const WishList = () => {
                                                                     })
                                                                 }
                                                             </Row>
+                                                            {/*<Row>
+                                                                {isAddBtnYn &&  <Button className="mt-3 mb-3" variant="dark" onClick={(() => {setPageNum(pageNum + 3)})}>더보기</Button>}
+                                                            </Row>*/}
                                                         </Container>
                                                     </div>
                                                 </div>

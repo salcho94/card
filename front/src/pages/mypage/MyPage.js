@@ -51,6 +51,7 @@ const MyPage = () => {
 
             getStatistics(formData).then(res =>{
                 setStatist(res.data);
+                console.log(res)
             })
         }
     },[])
@@ -118,22 +119,25 @@ const MyPage = () => {
                                   <strong>{year}년 {month}월</strong> 목표금액 : <strong>{user.target}</strong> 원
                                 </ListGroup.Item>
                                 <ListGroup.Item action variant="info">
-                                    <strong>{year}년 {month}월</strong> 사용금액 : <strong>{statist.useMoney}</strong> 원
+                                    <strong>{year}년 {month}월</strong> 사용금액 : <strong>{statist.useMoney ?  statist.useMoney : '0'}</strong> 원
                                 </ListGroup.Item>
                                 <ListGroup.Item action variant="info">
-                                    <strong>{year}년 {month}월</strong> 사용가능 금액 : {statist.useCanMoney < 0 ? '0' : statist.useCanMoney} 원
+                                    <strong>{year}년 {month}월</strong> 사용가능 금액 : {statist.useCanMoney < 0 ? '0' : statist.useCanMoney}원
                                 </ListGroup.Item>
                                 <ListGroup.Item action variant="info">
-                                    <strong>{year}년 {month}월</strong> 남은기간 :<strong>{day_calc}</strong> 일
+                                    <strong>{year}년 {month}월</strong> 남은기간 : <strong>{day_calc}</strong> 일
+                                </ListGroup.Item>
+                                <ListGroup.Item action variant="secondary">
+                                    주별 사용권장 금액 : {statist.dayUseMoney * 7} 원
+                                </ListGroup.Item>
+                                <ListGroup.Item action variant="secondary">
+                                    일별 사용권장 금액 : {statist.dayUseMoney} 원
                                 </ListGroup.Item>
                                 <ListGroup.Item action variant="light">
-                                    금주 사용 금액 : {statist.weekUseMoney} 원
+                                    <strong>금주 사용 금액 : {statist.weekUseMoney ?  statist.weekUseMoney : '0'} 원</strong>
                                 </ListGroup.Item>
                                 <ListGroup.Item action variant="light">
-                                    금주 사용가능 금액 : {statist.weekCanUseMoney < 0 ? '0' : statist.weekCanUseMoney} 원
-                                </ListGroup.Item>
-                                <ListGroup.Item action variant="light">
-                                    일일 사용가능 금액 : {statist.dayUseMoney} 원
+                                    <strong>금주 사용가능 금액 : {statist.weekCanUseMoney < 0 ? '0' : statist.weekCanUseMoney} 원</strong>
                                 </ListGroup.Item>
                                 {
                                     statist.useCanMoney < 0 &&

@@ -11,10 +11,10 @@ export const getWishCode = async  () => {
         console.error(error);
     }
 }
-export const getWishList = async  (memberId,cate) => {
+export const getWishList = async  (memberId,cate,pageNum,wishState) => {
     try {
         //응답 성공
-        const response = await axios.get(`/api/wish/getWishList?memberId=${memberId}&cate=${cate}`);
+        const response = await axios.get(`/api/wish/getWishList?memberId=${memberId}&cate=${cate}&pageNum=${pageNum}&wishState=${wishState}`);
         return response.data;
     } catch (error) {
         //응답 실패

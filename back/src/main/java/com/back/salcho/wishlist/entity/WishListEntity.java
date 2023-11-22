@@ -10,6 +10,7 @@ import java.util.Date;
 @Setter
 
 public class WishListEntity {
+    private int pageNum;
     private int memberId;
     private int wishItemId;
     private MultipartFile imgFile;
@@ -21,6 +22,7 @@ public class WishListEntity {
     private String wishDone;
     private String wishYn;
     private String delYn;
+    private String buyYn;
     private String wishReason;
     private String cateId;
     private String cateName;
