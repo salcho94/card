@@ -39,20 +39,22 @@ const MyPage = () => {
     useEffect(() =>{
         if (user.userId !== "" ) {
             getMember(user.userId).then(res =>{
+                let formData = new FormData;
+
+                formData.append('memberId', user.userId);
+                formData.append('target', res.data.target);
+                formData.append('month', year +'-'+month);
+
+                getStatistics(formData).then(state =>{
+                    setStatist(state.data);
+                })
+
                 dispatch(updateReduceTarget(res.data.target));
             })
             if(Number(user.target)> 0) {
                 setTargetYn(false);
             }
-            let formData = new FormData;
-            formData.append('memberId', user.userId);
-            formData.append('target', user.target);
-            formData.append('month', year +'-'+month);
 
-            getStatistics(formData).then(res =>{
-                setStatist(res.data);
-                console.log(res)
-            })
         }
     },[])
 
