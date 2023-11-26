@@ -28,10 +28,16 @@ public class WishListController {
     public List<Map<String,Object>>  getWishList(@RequestParam String memberId,@RequestParam String cate,@RequestParam String pageNum,@RequestParam String wishState) {
         WishListEntity entity = new WishListEntity();
         entity.setWishItemCate(cate);
-        entity.setPageNum(Integer.parseInt(pageNum));
         entity.setMemberId(Integer.parseInt(memberId));
         entity.setBuyYn(wishState);
+        entity.setStartPage(Integer.parseInt(pageNum));
+        entity.setEndPage(3);
+        int totalCount =  wishListService.getTotalCount(entity);
+        Map<String,Object> total = new HashMap<>();
+        total.put("total",totalCount);
+
         List<Map<String,Object>> map =  wishListService.getWishList(entity);
+        map.add(0,total);
         return map;
     }
 

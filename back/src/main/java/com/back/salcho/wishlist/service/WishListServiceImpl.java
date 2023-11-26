@@ -43,4 +43,9 @@ public class WishListServiceImpl implements WishListService {
         return wishListMapper.wishDoneItem(wishItemId);
     }
 
+    @Override
+    public int getTotalCount(WishListEntity wishListEntity) {
+        return wishListMapper.getTotalCount(wishListEntity);
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.back.salcho.wishlist.entity;
 
+import com.back.salcho.util.PageDto;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,8 +10,7 @@ import java.util.Date;
 @Getter
 @Setter
 
-public class WishListEntity {
-    private int pageNum;
+public class WishListEntity  extends PageDto {
     private int memberId;
     private int wishItemId;
     private MultipartFile imgFile;

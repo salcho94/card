@@ -15,18 +15,44 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import noImg from './../../img/no_img.jpg'
+import Pagination from 'react-bootstrap/Pagination';
+
 
 const WishList = () => {
 
     const navigate = useNavigate();
     const [wishCate,setWishCate] =  useState([{codeId:'',cateName:''}])
     const [wishState,setWishState] =  useState("N")
-    const [isAddBtnYn,setIsAddBtnYn] =  useState(true)
+    const [totalCnt,setTotalCnt] =  useState(0)
+    const [active,setActive] = useState(1);
     const [pageNum,setPageNum] =  useState(0)
-    const [cate,setCate] =  useState("all")
+    const [cate,setCate] =  useState("all");
+
     let user = useSelector((state) => state.user);
 
 
+    let items = [];
+    for (let number = 1; number <=  Math.ceil(totalCnt/3); number++) {
+        if(active >= 5){
+            if((active -2) <= number && (active +2) >= number ){
+                items.push(
+                    <Pagination.Item key={number} active={number === active} onClick={()=>{ setPageNum((number * 3) - 3) ; setActive(number); }}>
+                        {number}
+                    </Pagination.Item>
+                );
+            }
+        }else{
+            if(number <= 5 ){
+                items.push(
+                    <Pagination.Item key={number} active={number === active} onClick={()=>{ setPageNum((number * 3) - 3) ; setActive(number); }}>
+                        {number}
+                    </Pagination.Item>
+                );
+            }
+            console.log(active);
+        }
+
+    }
     const [wishList,setWishList] = useState([])
 
     useEffect(() => {
@@ -38,11 +64,16 @@ const WishList = () => {
         
         if(storeUser){
             getWishList(storeUser.userId,cate,pageNum,wishState).then((res) => {
+                console.log(res);
+                setTotalCnt(Number(res[0].total));
+                res.shift();
                 setWishList(res);
+
             });
         }
 
     }, [cate,wishState,pageNum]);
+
         return(
             <>
 
@@ -65,7 +96,7 @@ const WishList = () => {
                                     <Col md="4">
                                         <InputGroup className="m-3">
                                             <InputGroup.Text><strong>상품 카테고리</strong></InputGroup.Text>
-                                            <Form.Select aria-label="카테고리를 선택해 주세요" onChange={(e)=>{setCate(e.target.value)}}>
+                                            <Form.Select aria-label="카테고리를 선택해 주세요" onChange={(e)=>{setActive(1);setPageNum(0);setCate(e.target.value)}}>
                                                 <option value="all" >전체</option>
                                                 {
                                                     wishCate.map((data,i)=> {
@@ -80,7 +111,7 @@ const WishList = () => {
                                     <Col md="4">
                                             <InputGroup className="m-3">
                                                 <InputGroup.Text><strong>상품 상태</strong></InputGroup.Text>
-                                                <Form.Select aria-label="상태를 선택해 주세요" onChange={(e)=>{setWishState(e.target.value)}}>
+                                                <Form.Select aria-label="상태를 선택해 주세요" onChange={(e)=>{setActive(1);setPageNum(0);setWishState(e.target.value)}}>
                                                     <option value="N" >구매중</option>
                                                     <option value="Y" >구매함!</option>
                                                 </Form.Select>
@@ -121,6 +152,9 @@ const WishList = () => {
                                                                 {isAddBtnYn &&  <Button className="mt-3 mb-3" variant="dark" onClick={(() => {setPageNum(pageNum + 3)})}>더보기</Button>}
                                                             </Row>*/}
                                                         </Container>
+                                                        <div className="d-inline-block">
+                                                            <Pagination>{items}</Pagination>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </>

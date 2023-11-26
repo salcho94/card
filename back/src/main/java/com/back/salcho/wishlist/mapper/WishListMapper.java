@@ -19,4 +19,6 @@ public interface WishListMapper {
     public int deleteWishItem(String wishItemId);
 
     public int wishDoneItem(String wishItemId);
+
+    public int getTotalCount(WishListEntity wishListEntity);
 }
