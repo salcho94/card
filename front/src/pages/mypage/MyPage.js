@@ -57,13 +57,14 @@ const MyPage = () => {
                 formData.append('month', year +'-'+month);
 
                 getStatistics(formData).then(state =>{
-                    console.log(state.data)
                     setStatist(state.data);
                     let copyCate = [["Task", "Hours per Day"]];
-                    state.data.catedata.map(x =>{
-                        copyCate.push([x.cateName , x.cateCount]);
-                    })
-                    setCateData(copyCate);
+                    if(state.data.catedata){
+                        state.data.catedata.map(x =>{
+                            copyCate.push([x.cateName , x.cateCount]);
+                        })
+                        setCateData(copyCate);
+                    }
                 })
 
                 dispatch(updateReduceTarget(res.data.target));
