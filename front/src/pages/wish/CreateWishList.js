@@ -18,6 +18,7 @@ const CreateWishList = () =>{
     const [wishTitle, setWishTitle] = useState("");
     const [wishLink, setWishLink] = useState("");
     const [wishPrice, setWishPrice] = useState("");
+    const [wishSort,setWishSort] = useState("");
     const [wishReason, setWishReason] = useState("");
     const [wishCode,setWishCode] = useState([{codeId:'',cateName:''}])
     const imgRef = useRef();
@@ -29,6 +30,9 @@ const CreateWishList = () =>{
 
     },[])
 
+    const saveWishSort = (e) =>{
+        setWishSort(e.target.value);
+    }
     const saveWishCate = (e) =>{
         setWishCate(e.target.value);
     }
@@ -73,6 +77,7 @@ const CreateWishList = () =>{
                 formData.append('wishItemTitle',wishTitle);
                 formData.append('wishItemCate',wishCate);
                 formData.append('wishReason',wishReason);
+                formData.append('wishSort',Number(wishSort));
 
                 wishSubmit(formData).then((res)=>{
                     alert(res.data.msg);
@@ -90,6 +95,14 @@ const CreateWishList = () =>{
                 style={{  height: "330px", width: "auto", padding: "30px"}}
             />
             <Container className="p-5">
+                <InputGroup className="mb-3">
+                    <InputGroup.Text><strong>구매 중요도</strong></InputGroup.Text>
+                    <Form.Select aria-label="중요도를 선택해 주세요" onChange={(e)=>{saveWishSort(e)}}>
+                        <option  value="1">중요함</option>
+                        <option  value="2">덜 중요함</option>
+                        <option  value="3">안 중요함</option>
+                    </Form.Select>
+                </InputGroup>
                 <InputGroup className="mb-3">
                     <Form.Control
                         type="file"

@@ -13,6 +13,7 @@ import java.util.Date;
 public class WishListEntity  extends PageDto {
     private int memberId;
     private int wishItemId;
+    private int wishSort;
     private MultipartFile imgFile;
     private String wishItemImgPath;
     private String wishSiteLink;

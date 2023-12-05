@@ -43,12 +43,18 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Map<String, Object> getStatistics(Map<String, String> reqMap) {
+
         return memberMapper.getStatistics(reqMap);
     }
 
     @Override
     public Map<String, String> getMember(String memberId) {
         return memberMapper.getMember(memberId);
+    }
+
+    @Override
+    public List<Map<String,Object>> getCateData(Map<String, String> reqMap) {
+        return memberMapper.getCateData(reqMap);
     }
 
 

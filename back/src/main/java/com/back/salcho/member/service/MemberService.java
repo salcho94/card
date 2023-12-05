@@ -20,4 +20,6 @@ public interface MemberService {
     Map<String, Object> getStatistics(Map<String, String> reqMap);
 
     Map<String, String> getMember(String memberId);
+
+    List<Map<String,Object>> getCateData(Map<String, String> reqMap);
 }

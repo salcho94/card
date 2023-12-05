@@ -10,7 +10,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-
+import { Chart } from "react-google-charts";
 
 
 const MyPage = () => {
@@ -20,11 +20,22 @@ const MyPage = () => {
     let lastday = new Date(year,0,31);
     let day_calc = (lastday.getDate() - now.getDate())
 
-
+    const data = [
+        ["Task", "Hours per Day"],
+        ["Work", 11],
+        ["Eat", 2],
+        ["Commute", 2],
+        ["Watch TV", 2],
+        ["Sleep", 7],
+    ];
+    const options = {
+        title: "카테고리별 사용내역",
+    };
 
     const user = useSelector((state) => state.user);
     const navigate = useNavigate();
     const array = Array.from({ length: 500 });
+    const [cateData,setCateData] = useState([["Task", "Hours per Day"]])
     const [idYn,setIdYn] = useState(false);
     const [targetValue,setTargetValue] = useState("10000");
     const [statist,setStatist] = useState({
@@ -46,7 +57,13 @@ const MyPage = () => {
                 formData.append('month', year +'-'+month);
 
                 getStatistics(formData).then(state =>{
+                    console.log(state.data)
                     setStatist(state.data);
+                    let copyCate = [["Task", "Hours per Day"]];
+                    state.data.catedata.map(x =>{
+                        copyCate.push([x.cateName , x.cateCount]);
+                    })
+                    setCateData(copyCate);
                 })
 
                 dispatch(updateReduceTarget(res.data.target));
@@ -97,8 +114,16 @@ const MyPage = () => {
                         setIdYn(!idYn);
                     }}>고유 아이디 {!idYn ? '확인' : '숨김'}</button>
                 </div>
+                {cateData.length > 1 &&
+                <Chart
+                    chartType="PieChart"
+                    data={cateData}
+                    options={options}
+                    width={"100%"}
+                    height={"400px"}
+                />
+                }
                 {
-
                     targetYn ?
                     <>
                         <Container className="p-5">
@@ -130,7 +155,7 @@ const MyPage = () => {
                                     <strong>{year}년 {month}월</strong> 남은기간 : <strong>{day_calc}</strong> 일
                                 </ListGroup.Item>
                                 <ListGroup.Item action variant="secondary">
-                                    주별 사용권장 금액 : {statist.dayUseMoney * 7} 원
+                                    주별 사용권장 금액 : {user.target/4} 원
                                 </ListGroup.Item>
                                 <ListGroup.Item action variant="secondary">
                                     일별 사용권장 금액 : {statist.dayUseMoney} 원
@@ -150,7 +175,7 @@ const MyPage = () => {
                                 <ListGroup.Item action variant="warning">
                                     달성여부 :
                                     {
-                                        user.target > statist.useMoney ?
+                                        user.target >= (statist.useMoney?statist.useMoney:0) ?
                                             <strong className="text-primary">
                                                 달성중
                                             </strong>
